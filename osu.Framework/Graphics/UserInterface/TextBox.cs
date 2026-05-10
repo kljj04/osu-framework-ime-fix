@@ -1852,6 +1852,7 @@ namespace osu.Framework.Graphics.UserInterface
             selectionStart = imeCompositionStart + newSelectionStart;
             selectionEnd = selectionStart + newSelectionLength;
 
+            // push caret to end if composition is working
             if (imeCompositionLength > 0)
                 selectionStart = selectionEnd = imeCompositionStart + imeCompositionLength;
             
