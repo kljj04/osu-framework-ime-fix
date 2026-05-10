@@ -1852,6 +1852,13 @@ namespace osu.Framework.Graphics.UserInterface
             selectionStart = imeCompositionStart + newSelectionStart;
             selectionEnd = selectionStart + newSelectionLength;
 
+            // [직접 추가할 로직] 조합 중인 텍스트가 있다면, 카렛을 강제로 글자 끝으로 밀어버림
+            if (imeCompositionLength > 0)
+            {
+                // 한글의 경우 보통 selectionLength가 0이므로, 시작과 끝을 모두 조합 끝으로 보냄
+                selectionStart = selectionEnd = imeCompositionStart + imeCompositionLength;
+            }
+
             if (userEvent) OnImeComposition(newComposition, removeCount, addCount, oldStart != selectionStart || oldEnd != selectionEnd);
 
             endTextChange(beganChange);
